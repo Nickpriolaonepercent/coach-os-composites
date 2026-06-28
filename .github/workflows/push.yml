@@ -1,0 +1,18 @@
+name: Push to Replicate
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  push:
+    name: Push to Replicate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: replicate/setup-cog@v2
+        with:
+          token: ${{ secrets.REPLICATE_API_TOKEN }}
+      - run: cog push r8.im/nickpriolaonepercent/coach-os-composites
